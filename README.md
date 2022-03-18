@@ -1,13 +1,9 @@
 # ChIPQC
 
-This is a folk of ChIPQC in bioconductor. I need to fix a bug in QCmetrics(ChIPQCsample) which will cause the error: "names' attribute [9] must be the same length as the vector [7]"
+This is a fork of ChIPQC in bioconductor/shengqh. Error: "names' attribute [x] must be the same length as the vector [x]" should be fixed. In my case due to blacklist regions being 0-start (out of bound in the context of GRanges) added seqlength implementation and trimming to counter this.
 
 Installation
 ```
 library(devtools)
-install_github("shengqh/ChIPQC")
-```
-or
-```
-BiocManager::install('shengqh/ChIPQC')
+install_github("juhomon/ChIPQC")
 ```
