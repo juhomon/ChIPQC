@@ -182,9 +182,12 @@ sampleQC <- function(bamFile,bedFile=NULL,blklist=NULL,ChrOfInterest=NULL,GeneAn
       }
       
       if(!is.null(blklist)){
-        blkRanges <- GetGRanges(blklist,names(ChrLengths),names(ChrLengths)[k])           
+        blkRanges <- trim(GetGRanges(blklist,names(ChrLengths),names(ChrLengths)[k]))
+        seqlengths(blkRanges) <- ChrLengths
+        blkRanges <-trim(blkRanges)
         GRangesOfInterestListBL <- GRangesList(GRanges(seqnames(blkRanges),ranges(blkRanges)))
         names(GRangesOfInterestListBL) <- "BlackList"
+        seqlevels(GRangesOfInterestListBL) <- names(ChrLengths)
         GRangesOfInterestList <- c(GRangesOfInterestList,GRangesOfInterestListBL)
         Cov[[names(ChrLengths)[k]]][ranges(blkRanges)] <- 0
         SSDBL <- c(SSDBL,sd(Cov)[names(ChrLengths)[k]])
